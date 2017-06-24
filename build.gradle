@@ -1,4 +1,4 @@
-group 'com.teamtreehouse'
+group 'me.owlschool'
 version '1.0-SNAPSHOT'
 
 buildscript{
