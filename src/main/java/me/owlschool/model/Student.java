@@ -23,17 +23,18 @@ public class Student extends BaseEntity {
     //@OneToMany(mappedBy = "parent")
     //List<StudentParent> parents;
 
-    int classRoom;
+    @ManyToOne
+    ClassRoom classRoom;
 
     public Student() {
     }
 
-    public Student(Person person, int classRoom) {
+    public Student(Person person, ClassRoom classRoom) {
         this.person = person;
         this.classRoom = classRoom;
     }
 
-    public Student(Person person, int classRoom, List<Parent> parents) {
+    public Student(Person person, ClassRoom classRoom, List<Parent> parents) {
         this.person = person;
         this.classRoom = classRoom;
         this.parents = parents;
@@ -47,11 +48,11 @@ public class Student extends BaseEntity {
         this.person = person;
     }
 
-    public int getClassRoom() {
+    public ClassRoom getClassRoom() {
         return classRoom;
     }
 
-    public void setClassRoom(int classRoom) {
+    public void setClassRoom(ClassRoom classRoom) {
         this.classRoom = classRoom;
     }
 
