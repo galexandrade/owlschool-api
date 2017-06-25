@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -137,6 +138,49 @@ public class DatabaseLoader implements ApplicationRunner {
         );
 
         classRoom.setClassRoomTeacherMatters(classRoomTeacherMatters);
+
+        List<Matter> mondaySchedule = Arrays.asList(
+                matters.get(0),
+                matters.get(5),
+                matters.get(2),
+                matters.get(3)
+        );
+        List<Matter> tuesdaySchedule = Arrays.asList(
+                matters.get(1),
+                matters.get(7)
+        );
+        List<Matter> wednesdaySchedule = Arrays.asList(
+                matters.get(3),
+                matters.get(1),
+                matters.get(5),
+                matters.get(6)
+        );
+        List<Matter> thursdaySchedule = Arrays.asList(
+                matters.get(7),
+                matters.get(3),
+                matters.get(4)
+        );
+        List<Matter> fridaySchedule = Arrays.asList(
+                matters.get(4),
+                matters.get(2),
+                matters.get(3),
+                matters.get(6)
+        );
+
+        ClassRoomSchedule schedule = new ClassRoomSchedule();
+        schedule.setMonday(mondaySchedule);
+        schedule.setTuesday(tuesdaySchedule);
+        schedule.setWednesday(wednesdaySchedule);
+        schedule.setThursday(thursdaySchedule);
+        schedule.setFriday(fridaySchedule);
+
+        classRoom.setSchedule(schedule);
+
+        List<Event> events = Arrays.asList(
+                new Event("Feira cultural", new Date(), "", classRoom, null)
+        );
+
+        classRoom.setEvents(events);
 
         classRoomRepository.save(classRoom);
     }

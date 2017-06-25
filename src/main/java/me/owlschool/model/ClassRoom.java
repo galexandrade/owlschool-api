@@ -19,6 +19,10 @@ public class ClassRoom extends BaseEntity {
     List<Student> students;
     @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
     List<ClassRoomTeacherMatter> classRoomTeacherMatters;
+    @OneToOne(cascade = CascadeType.ALL)
+    ClassRoomSchedule schedule;
+    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
+    List<Event> events;
 
     public ClassRoom() {
     }
@@ -80,5 +84,21 @@ public class ClassRoom extends BaseEntity {
 
     public void setClassRoomTeacherMatters(List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
         this.classRoomTeacherMatters = classRoomTeacherMatters;
+    }
+
+    public ClassRoomSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ClassRoomSchedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }
