@@ -38,22 +38,24 @@ public class DatabaseLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //*************** LOAD USERS ***************************************
-        List<User> users = Arrays.asList(
-                new User("g.alex.andrade@gmail.com", "456789", new String[]{"ROLE_ADMIN"}),
-                new User("g.juliane.andrade@gmail.com", "123456", new String[]{"ROLE_USER"})
-        );
-        userRepository.save(users);
-
         //*************** LOAD SCHOOL ***************************************
         List<School> schools = Arrays.asList(
-            new School("Escola Adventista Costa e Silva",
+                new School("Escola Adventista Costa e Silva",
                         "12332132132",
                         new Contact("cajcs@adventista.edu.br", "4797745925", "www.escolaadventista.com.br"),
                         new Address("Brazil", "SC", "89824999", "Joinville", "Rua Joaçaba", 1))
         );
 
         schoolRepository.save(schools);
+
+        //*************** LOAD USERS ***************************************
+        List<User> users = Arrays.asList(
+                new User("g.alex.andrade@gmail.com", "456789", new String[]{"ROLE_ADMIN"}, schools.get(0)),
+                new User("g.juliane.andrade@gmail.com", "123456", new String[]{"ROLE_USER"}, schools.get(0))
+        );
+        userRepository.save(users);
+
+
 
         //*************** LOAD STUDENTS ***************************************
         List<Parent> parents = Arrays.asList(

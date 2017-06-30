@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User extends BaseEntity {
@@ -17,6 +18,8 @@ public class User extends BaseEntity {
     private String password;
     @JsonIgnore
     private String[] roles;
+    @ManyToOne
+    private School school;
 
     protected User(){
         super();
@@ -27,6 +30,14 @@ public class User extends BaseEntity {
         this.email = email;
         this.setPassword(password);
         this.roles = roles;
+    }
+
+    public User(String email, String password, String[] roles, School school) {
+        this();
+        this.email = email;
+        this.setPassword(password);
+        this.roles = roles;
+        this.school = school;
     }
 
     public String getEmail() {
@@ -51,5 +62,13 @@ public class User extends BaseEntity {
 
     public void setRoles(String[] roles) {
         this.roles = roles;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 }

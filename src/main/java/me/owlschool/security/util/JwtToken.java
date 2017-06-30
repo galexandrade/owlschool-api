@@ -60,6 +60,7 @@ public class JwtToken {
         Claims claims = Jwts.claims().setSubject(user.getEmail());
         claims.put("userId", user.getId() + "");
         claims.put("role", user.getRoles());
+        claims.put("schoolId", user.getSchool().getId());
 
         return Jwts.builder()
                 .setClaims(claims)
