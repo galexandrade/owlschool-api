@@ -62,6 +62,11 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
 
         // As this authentication is in HTTP header, after success we need to continue the request normally
         // and return the response as if the resource was not secured at all
-        chain.doFilter(request, response);
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            chain.doFilter(request, response);
+        }
+
     }
 }

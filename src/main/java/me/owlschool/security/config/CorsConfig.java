@@ -20,7 +20,7 @@ public class CorsConfig extends WebMvcConfigurerAdapter {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedHeaders("*")
-                        .allowCredentials(false)
+                        .allowCredentials(true)
                         .allowedMethods("PUT", "POST", "GET", "OPTIONS", "DELETE");
             }
         };
