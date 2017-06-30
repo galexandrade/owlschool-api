@@ -40,8 +40,8 @@ public class DatabaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         //*************** LOAD USERS ***************************************
         List<User> users = Arrays.asList(
-                new User("g.alex.andrade@gmail.com", "456", new String[]{"ROLE_ADMIN"}),
-                new User("g.juliane.andrade@gmail.com", "123", new String[]{"ROLE_USER"})
+                new User("g.alex.andrade@gmail.com", "456789", new String[]{"ROLE_ADMIN"}),
+                new User("g.juliane.andrade@gmail.com", "123456", new String[]{"ROLE_USER"})
         );
         userRepository.save(users);
 
