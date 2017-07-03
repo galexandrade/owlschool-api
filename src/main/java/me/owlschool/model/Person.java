@@ -10,7 +10,8 @@ import java.util.Date;
  */
 @Entity
 public class Person extends BaseEntity {
-    String name;
+    String firstName;
+    String lastName;
     Date birthDay;
     Long registerNumber;
     String picture;
@@ -22,8 +23,9 @@ public class Person extends BaseEntity {
     public Person() {
     }
 
-    public Person(String name, Date birthDay, Long registerNumber, String picture, Contact contact, Address address) {
-        this.name = name;
+    public Person(String firstName, String lastName, Date birthDay, Long registerNumber, String picture, Contact contact, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthDay = birthDay;
         this.registerNumber = registerNumber;
         this.picture = picture;
@@ -31,12 +33,20 @@ public class Person extends BaseEntity {
         this.address = address;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getBirthDay() {

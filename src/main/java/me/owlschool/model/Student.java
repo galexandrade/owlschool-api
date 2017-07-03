@@ -15,7 +15,7 @@ public class Student extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     Person person;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     //@JoinTable(name = "student_parent", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"))
     @JoinTable
     List<Parent> parents;

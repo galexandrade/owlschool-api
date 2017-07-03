@@ -10,7 +10,7 @@ import java.util.List;
 public class Parent extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     Person person;
-    @ManyToMany(mappedBy = "parents",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "parents",cascade = CascadeType.PERSIST)
     //@JoinTable(name = "student_parent", joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     List<Student> students;
 
