@@ -60,13 +60,13 @@ public class DatabaseLoader implements ApplicationRunner {
         //*************** LOAD STUDENTS ***************************************
         List<Parent> parents = Arrays.asList(
                 new Parent(
-                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "img1.jpg",
+                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Nasta",
                                     new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "MOTHER"
                 ),
                 new Parent(
-                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "img1.jpg",
+                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "Andrey",
                                     new Contact("g.alex.andrade@gmail.com", "4799745925", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "FATHER"
