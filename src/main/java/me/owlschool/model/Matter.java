@@ -12,7 +12,7 @@ import java.util.List;
 public class Matter extends BaseEntity {
     String matterName;
     @ManyToMany(mappedBy = "matters",cascade = CascadeType.ALL)
-    List<Teacher> teachers;
+    List<Staff> teachers;
 
     public Matter() {
     }
@@ -21,7 +21,7 @@ public class Matter extends BaseEntity {
         this.matterName = matterName;
     }
 
-    public Matter(String matterName, List<Teacher> teachers) {
+    public Matter(String matterName, List<Staff> teachers) {
         this.matterName = matterName;
         this.teachers = teachers;
     }
@@ -34,11 +34,11 @@ public class Matter extends BaseEntity {
         this.matterName = matterName;
     }
 
-    public List<Teacher> getTeachers() {
+    public List<Staff> getTeachers() {
         return teachers;
     }
 
-    public void setTeacher(List<Teacher> teachers) {
+    public void setTeacher(List<Staff> teachers) {
         this.teachers = teachers;
     }
 }

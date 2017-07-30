@@ -10,18 +10,25 @@ import java.util.List;
 public class Staff extends BaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     Person person;
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     User user;
     @OneToOne(cascade = CascadeType.ALL)
     Permission permission;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable
+    List<Matter> matters;
+
+    private String function;
+
     public Staff() {
     }
 
-    public Staff(Person person, User user, Permission permission) {
+    public Staff(Person person, User user, Permission permission, String function) {
         this.person = person;
         this.user = user;
         this.permission = permission;
+        this.function = function;
     }
 
     public Person getPerson() {
@@ -46,5 +53,21 @@ public class Staff extends BaseEntity {
 
     public void setPermission(Permission permission) {
         this.permission = permission;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public List<Matter> getMatters() {
+        return matters;
+    }
+
+    public void setMatters(List<Matter> matters) {
+        this.matters = matters;
     }
 }

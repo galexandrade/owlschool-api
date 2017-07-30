@@ -21,7 +21,7 @@ public class CorsConfig extends WebMvcConfigurerAdapter {
                         .allowedOrigins("*")
                         .allowedHeaders("*")
                         .allowCredentials(true)
-                        .allowedMethods("PUT", "POST", "GET", "OPTIONS", "DELETE");
+                        .allowedMethods("PATCH", "PUT", "POST", "GET", "OPTIONS", "DELETE");
             }
         };
     }

@@ -14,7 +14,7 @@ public class ClassRoom extends BaseEntity {
     String name;
     String period;
     @OneToOne
-    Teacher mainTeacher;
+    Staff mainTeacher;
     @OneToMany(mappedBy = "classRoom", cascade = CascadeType.MERGE)
     List<Student> students;
     @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
@@ -32,13 +32,13 @@ public class ClassRoom extends BaseEntity {
         this.period = period;
     }
 
-    public ClassRoom(String name, String period, Teacher mainTeacher) {
+    public ClassRoom(String name, String period, Staff mainTeacher) {
         this.name = name;
         this.period = period;
         this.mainTeacher = mainTeacher;
     }
 
-    public ClassRoom(String name, String period, Teacher mainTeacher, List<Student> students, List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
+    public ClassRoom(String name, String period, Staff mainTeacher, List<Student> students, List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
         this.name = name;
         this.period = period;
         this.mainTeacher = mainTeacher;
@@ -62,11 +62,11 @@ public class ClassRoom extends BaseEntity {
         this.period = period;
     }
 
-    public Teacher getMainTeacher() {
+    public Staff getMainTeacher() {
         return mainTeacher;
     }
 
-    public void setMainTeacher(Teacher mainTeacher) {
+    public void setMainTeacher(Staff mainTeacher) {
         this.mainTeacher = mainTeacher;
     }
 

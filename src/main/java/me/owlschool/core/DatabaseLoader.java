@@ -20,19 +20,19 @@ public class DatabaseLoader implements ApplicationRunner {
     private final SchoolRepository schoolRepository;
     private final StudentRepository studentRepository;
     private final StaffRepository staffRepository;
-    private final TeacherRepository teacherRepository;
+    private final MatterRerpository matterRepository;
     private final ClassRoomRepository classRoomRepository;
 
     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     @Autowired
-    public DatabaseLoader(CourseRepository courseRepository, UserRepository userRepository, SchoolRepository schoolRepository, StudentRepository studentRepository, StaffRepository staffRepository, TeacherRepository teacherRepository, ClassRoomRepository classRoomRepository) {
+    public DatabaseLoader(CourseRepository courseRepository, UserRepository userRepository, SchoolRepository schoolRepository, StudentRepository studentRepository, StaffRepository staffRepository, MatterRerpository matterRepository, ClassRoomRepository classRoomRepository) {
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.schoolRepository = schoolRepository;
         this.studentRepository = studentRepository;
         this.staffRepository = staffRepository;
-        this.teacherRepository = teacherRepository;
+        this.matterRepository = matterRepository;
         this.classRoomRepository = classRoomRepository;
     }
 
@@ -50,8 +50,7 @@ public class DatabaseLoader implements ApplicationRunner {
 
         //*************** LOAD USERS ***************************************
         List<User> users = Arrays.asList(
-                new User("g.alex.andrade@gmail.com", "456789", new String[]{"ROLE_ADMIN"}, schools.get(0)),
-                new User("g.juliane.andrade@gmail.com", "123456", new String[]{"ROLE_USER"}, schools.get(0))
+                new User("g.alex.andrade@gmail.com", "456789", new String[]{"ROLE_ADMIN"}, schools.get(0))
         );
         userRepository.save(users);
 
@@ -60,13 +59,13 @@ public class DatabaseLoader implements ApplicationRunner {
         //*************** LOAD STUDENTS ***************************************
         List<Parent> parents = Arrays.asList(
                 new Parent(
-                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Nasta",
+                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane",
                                     new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "MOTHER"
                 ),
                 new Parent(
-                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "Andrey",
+                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "Alex",
                                     new Contact("g.alex.andrade@gmail.com", "4799745925", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "FATHER"
@@ -75,13 +74,13 @@ public class DatabaseLoader implements ApplicationRunner {
 
         List<Student> students = Arrays.asList(
                 new Student(
-                        new Person("Sarah Lyss", "R. Andrade", df.parse("14/12/2013"), null, "img1.jpg", null,
+                        new Person("Sarah Lyss", "R. Andrade", df.parse("14/12/2013"), null, "Sarah", null,
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         null,
                         parents
                 ),
                 new Student(
-                        new Person("Letícia", "R. Andrade", df.parse("14/12/2007"), null, "img1.jpg", null,
+                        new Person("Letícia", "R. Andrade", df.parse("14/12/2007"), null, "Leticia", null,
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         null,
                         parents
@@ -89,30 +88,6 @@ public class DatabaseLoader implements ApplicationRunner {
         );
 
         studentRepository.save(students);
-
-        //*************** LOAD STAFFS ***************************************
-        Staff staffJuliane = new Staff();
-        staffJuliane.setPerson(new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "img1.jpg",
-                        new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
-                        new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564))
-                );
-        staffJuliane.setUser(userRepository.findOne(Long.parseLong("1")));
-        staffJuliane.setPermission(new Permission(
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true
-        ));
-
-        List<Staff> staffs = Arrays.asList(
-                staffJuliane
-        );
-
-        staffRepository.save(staffs);
 
         //*************** LOAD TEACHER ***************************************
         List<Matter> matters = Arrays.asList(
@@ -126,17 +101,42 @@ public class DatabaseLoader implements ApplicationRunner {
                 new Matter("Religion")
         );
 
-        Teacher teacher = new Teacher(staffJuliane, matters);
+        matterRepository.save(matters);
 
-        teacherRepository.save(teacher);
+        //*************** LOAD STAFFS ***************************************
+        Staff staffJuliane = new Staff();
+        staffJuliane.setPerson(new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane",
+                        new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
+                        new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564))
+                );
+        staffJuliane.setUser(new User("g.juliane.andrade@gmail.com", "123456", new String[]{"ROLE_USER"}, schools.get(0)));
+        staffJuliane.setPermission(new Permission(
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+        ));
+
+        staffJuliane.setMatters(Arrays.asList(matterRepository.findOne(Long.parseLong("1"))));
+
+        List<Staff> staffs = Arrays.asList(
+                staffJuliane
+        );
+
+        staffRepository.save(staffs);
+
 
         //*************** LOAD CLASS ***************************************
-        ClassRoom classRoom = new ClassRoom("Pré 1 B", "Tarde", teacher);
+        ClassRoom classRoom = new ClassRoom("Pré 1 B", "Tarde", staffJuliane);
         classRoom.setStudents(students);
 
         List<ClassRoomTeacherMatter> classRoomTeacherMatters = Arrays.asList(
-                new ClassRoomTeacherMatter(teacher, matters.get(0), classRoom),
-                new ClassRoomTeacherMatter(teacher, matters.get(4), classRoom)
+                new ClassRoomTeacherMatter(staffJuliane, matters.get(0), classRoom),
+                new ClassRoomTeacherMatter(staffJuliane, matters.get(4), classRoom)
         );
 
         classRoom.setClassRoomTeacherMatters(classRoomTeacherMatters);

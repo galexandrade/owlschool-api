@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class ClassRoomTeacherMatter extends BaseEntity {
     @OneToOne(cascade = CascadeType.MERGE)
-    Teacher teacher;
+    Staff teacher;
     @OneToOne(cascade = CascadeType.MERGE)
     Matter matter;
     @ManyToOne
@@ -17,17 +17,17 @@ public class ClassRoomTeacherMatter extends BaseEntity {
     public ClassRoomTeacherMatter() {
     }
 
-    public ClassRoomTeacherMatter(Teacher teacher, Matter matter, ClassRoom classRoom) {
+    public ClassRoomTeacherMatter(Staff teacher, Matter matter, ClassRoom classRoom) {
         this.teacher = teacher;
         this.matter = matter;
         this.classRoom = classRoom;
     }
 
-    public Teacher getTeacher() {
+    public Staff getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(Staff teacher) {
         this.teacher = teacher;
     }
 
