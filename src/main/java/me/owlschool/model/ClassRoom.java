@@ -13,6 +13,7 @@ import java.util.List;
 public class ClassRoom extends BaseEntity {
     String name;
     String period;
+    String picture;
     @OneToOne
     Staff mainTeacher;
     @OneToMany(mappedBy = "classRoom", cascade = CascadeType.MERGE)
@@ -32,15 +33,17 @@ public class ClassRoom extends BaseEntity {
         this.period = period;
     }
 
-    public ClassRoom(String name, String period, Staff mainTeacher) {
+    public ClassRoom(String name, String period, String picture, Staff mainTeacher) {
         this.name = name;
         this.period = period;
+        this.picture = picture;
         this.mainTeacher = mainTeacher;
     }
 
-    public ClassRoom(String name, String period, Staff mainTeacher, List<Student> students, List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
+    public ClassRoom(String name, String period, String picture, Staff mainTeacher, List<Student> students, List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
         this.name = name;
         this.period = period;
+        this.picture = picture;
         this.mainTeacher = mainTeacher;
         this.students = students;
         this.classRoomTeacherMatters = classRoomTeacherMatters;
@@ -60,6 +63,14 @@ public class ClassRoom extends BaseEntity {
 
     public void setPeriod(String period) {
         this.period = period;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public Staff getMainTeacher() {

@@ -59,13 +59,13 @@ public class DatabaseLoader implements ApplicationRunner {
         //*************** LOAD STUDENTS ***************************************
         List<Parent> parents = Arrays.asList(
                 new Parent(
-                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane",
+                        new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane", "Educadora",
                                     new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "MOTHER"
                 ),
                 new Parent(
-                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "Alex",
+                        new Person("Alex Andrade", "P. Andrade", df.parse("22/03/1992"), Long.parseLong("07517911996"), "Alex", "System Analyst",
                                     new Contact("g.alex.andrade@gmail.com", "4799745925", null),
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         "FATHER"
@@ -74,13 +74,13 @@ public class DatabaseLoader implements ApplicationRunner {
 
         List<Student> students = Arrays.asList(
                 new Student(
-                        new Person("Sarah Lyss", "R. Andrade", df.parse("14/12/2013"), null, "Sarah", null,
+                        new Person("Sarah Lyss", "R. Andrade", df.parse("14/12/2013"), null, "Sarah", null, null,
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         null,
                         parents
                 ),
                 new Student(
-                        new Person("Letícia", "R. Andrade", df.parse("14/12/2007"), null, "Leticia", null,
+                        new Person("Letícia", "R. Andrade", df.parse("14/12/2007"), null, "Leticia", null, null,
                                     new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564)),
                         null,
                         parents
@@ -105,7 +105,7 @@ public class DatabaseLoader implements ApplicationRunner {
 
         //*************** LOAD STAFFS ***************************************
         Staff staffJuliane = new Staff();
-        staffJuliane.setPerson(new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane",
+        staffJuliane.setPerson(new Person("Juliane", "R. Andrade", df.parse("06/07/1984"), Long.parseLong("0759999999"), "Juliane", null,
                         new Contact("g.juliane.andrade@gmail.com", "47997755976", null),
                         new Address("Brazil", "SC", "89814999", "Joinville", "Rua Pavão", 564))
                 );
@@ -131,7 +131,7 @@ public class DatabaseLoader implements ApplicationRunner {
 
 
         //*************** LOAD CLASS ***************************************
-        ClassRoom classRoom = new ClassRoom("Pré 1 B", "Tarde", staffJuliane);
+        ClassRoom classRoom = new ClassRoom("Pré 1 B", "Tarde", "classroom", staffJuliane);
         classRoom.setStudents(students);
 
         List<ClassRoomTeacherMatter> classRoomTeacherMatters = Arrays.asList(

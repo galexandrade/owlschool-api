@@ -15,6 +15,7 @@ public class Person extends BaseEntity {
     Date birthDay;
     Long registerNumber;
     String picture;
+    String job;
     @OneToOne(cascade = CascadeType.ALL)
     Contact contact;
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,12 +24,13 @@ public class Person extends BaseEntity {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, Date birthDay, Long registerNumber, String picture, Contact contact, Address address) {
+    public Person(String firstName, String lastName, Date birthDay, Long registerNumber, String picture, String job, Contact contact, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.registerNumber = registerNumber;
         this.picture = picture;
+        this.job = job;
         this.contact = contact;
         this.address = address;
     }
@@ -87,5 +89,13 @@ public class Person extends BaseEntity {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 }
