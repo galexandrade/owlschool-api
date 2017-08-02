@@ -11,7 +11,7 @@ public class ClassRoomTeacherMatter extends BaseEntity {
     Staff teacher;
     @OneToOne(cascade = CascadeType.MERGE)
     Matter matter;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     ClassRoom classRoom;
 
     public ClassRoomTeacherMatter() {

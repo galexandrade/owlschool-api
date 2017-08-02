@@ -18,7 +18,7 @@ public class ClassRoom extends BaseEntity {
     Staff mainTeacher;
     @OneToMany(mappedBy = "classRoom", cascade = CascadeType.MERGE)
     List<Student> students;
-    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ClassRoomTeacherMatter> classRoomTeacherMatters;
     @OneToOne(cascade = CascadeType.ALL)
     ClassRoomSchedule schedule;
@@ -94,7 +94,14 @@ public class ClassRoom extends BaseEntity {
     }
 
     public void setClassRoomTeacherMatters(List<ClassRoomTeacherMatter> classRoomTeacherMatters) {
-        this.classRoomTeacherMatters = classRoomTeacherMatters;
+        if (this.classRoomTeacherMatters == null) {
+            this.classRoomTeacherMatters = classRoomTeacherMatters;
+        } else {
+            this.classRoomTeacherMatters.clear();
+            if(classRoomTeacherMatters != null)
+                this.classRoomTeacherMatters.addAll(classRoomTeacherMatters);
+        }
+        //this.classRoomTeacherMatters = classRoomTeacherMatters;
     }
 
     public ClassRoomSchedule getSchedule() {
