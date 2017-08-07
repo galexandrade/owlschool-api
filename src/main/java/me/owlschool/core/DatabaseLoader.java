@@ -120,6 +120,7 @@ public class DatabaseLoader implements ApplicationRunner {
                 true,
                 true
         ));
+        staffJuliane.setFunction("teacher");
 
         staffJuliane.setMatters(Arrays.asList(matterRepository.findOne(Long.parseLong("1"))));
 
@@ -131,8 +132,8 @@ public class DatabaseLoader implements ApplicationRunner {
 
 
         //*************** LOAD CLASS ***************************************
-        ClassRoom classRoom = new ClassRoom("Pré 1 B", "Tarde", "classroom", staffJuliane);
-        classRoom.setStudents(students);
+        ClassRoom classRoom = new ClassRoom("Pré 1 B", "morning", "classroom", staffJuliane);
+        classRoom.setStudents((List<Student>) studentRepository.findAll());
 
         List<ClassRoomTeacherMatter> classRoomTeacherMatters = Arrays.asList(
                 new ClassRoomTeacherMatter(staffJuliane, matters.get(0), classRoom),
@@ -185,5 +186,11 @@ public class DatabaseLoader implements ApplicationRunner {
         classRoom.setEvents(events);
 
         classRoomRepository.save(classRoom);
+
+        /*
+        Student student = studentRepository.findOne(Long.parseLong("1"));
+        student.setClassRoom(classRoom);
+        studentRepository.save(student);
+        */
     }
 }

@@ -86,6 +86,18 @@ public class ClassRoom extends BaseEntity {
     }
 
     public void setStudents(List<Student> students) {
+        List<Student> actualStudents = this.getStudents();
+        if(actualStudents != null)
+        for (Student student: actualStudents) {
+            if(!students.contains(student))
+                student.classRoom = null;
+        }
+
+        if(students != null)
+            for (Student student: students) {
+                student.classRoom = this;
+            }
+
         this.students = students;
     }
 

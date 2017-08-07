@@ -20,9 +20,6 @@ public class Student extends BaseEntity {
     @JoinTable
     List<Parent> parents;
 
-    //@OneToMany(mappedBy = "parent")
-    //List<StudentParent> parents;
-
     @ManyToOne
     ClassRoom classRoom;
 
